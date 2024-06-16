@@ -13,7 +13,8 @@ public class b2_24267 {
         try {
             long n = Long.parseLong(br.readLine());
 
-            bw.write(n*n*n + "\n");
+            // 시그마 이용하여 공식 유도
+            bw.write((n*(n-1)*(n-2))/6+ "\n");
             bw.write("3");
 
             bw.flush();
