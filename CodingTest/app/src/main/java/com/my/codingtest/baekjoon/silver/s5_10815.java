@@ -18,7 +18,7 @@ public class s5_10815 {
                 arrN[i] = Integer.parseInt(st.nextToken());
             }
             int M = Integer.parseInt(br.readLine()); // 찾아야 하는 숫자 카드 갯수
-            int[] arrM = new int[M]; // 찾아야 하는 카드 숫자들 (정렬용)
+            int[] arrM = new int[M]; // 찾아야 하는 카드 숫자들
             st = new StringTokenizer(br.readLine());
             for(int i=0;i<M;i++) {
                 int value = Integer.parseInt(st.nextToken());
