@@ -1,4 +1,4 @@
-package com.my.codingtest.programmers.level1;
+package com.my.codingtest.programmers.level2;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -9,6 +9,7 @@ class 해시_전화번호_목록 {
     public static void main(String[] args) {
         String[] phone_book = new String[] {"12","123","1235","567","88"};
 
+        System.out.println(solution1(phone_book));
         System.out.println(solution2(phone_book));
     }
 
@@ -18,21 +19,19 @@ class 해시_전화번호_목록 {
     public static boolean solution1(String[] phone_book) {
         boolean answer = true;
 
-//        for(int i=0;i<phone_book.length;i++) {
-//            String num = phone_book[i];
-//            for(int j=0;j<phone_book.length;j++) {
-//                if(num == phone_book[j]) continue;
-//                else {
-//                    if(num.length() <= phone_book[j].length()) {
-//                        boolean isContain = num.contains(phone_book[j].substring(0, num.length()));
-//                        if(isContain) {
-//                            answer = false;
-//                            return answer;
-//                        }
-//                    }
-//                }
-//            }
-//        }
+        Map<String, Boolean> hashMap = new HashMap<>();
+
+        for(int i=0;i<phone_book.length;i++) {
+            hashMap.put(phone_book[i], false);
+        }
+
+        for(int i=0;i<phone_book.length;i++) {
+            for(int j=0;j<phone_book[i].length();j++) {
+                if(hashMap.containsKey(phone_book[i].substring(0, j))) {
+                    return false;
+                }
+            }
+        }
 
         return answer;
     }
