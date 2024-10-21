@@ -1,8 +1,6 @@
 package com.my.codingtest.programmers.level1;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class 실패율_KAKAO {
     public static void main(String[] args) {
@@ -34,7 +32,7 @@ public class 실패율_KAKAO {
 
         Arrays.sort(stages);
 
-        List<Solution.Pair> pairList = new ArrayList<>();
+        List<Pair> pairList = new ArrayList<>();
         int[] result = new int[N]; // 결과
 
         int currentStage = -1;
@@ -53,7 +51,7 @@ public class 실패율_KAKAO {
                     // 이전 단계에 대한 계산
                     double d = (double) currentStageUser / user;
                     user -= currentStageUser;
-                    pairList.add(new Solution.Pair(currentStage, d));
+                    pairList.add(new Pair(currentStage, d));
 
                     currentStageUser = 1;
                     currentStage = stages[i];
@@ -64,7 +62,7 @@ public class 실패율_KAKAO {
             // 이전 단계에 대한 계산
             double d = (double) currentStageUser / user;
             user -= currentStageUser;
-            pairList.add(new Solution.Pair(currentStage, d));
+            pairList.add(new Pair(currentStage, d));
         }
 
         // 값이 있는 스테이지에 대한 내림차순 정렬
