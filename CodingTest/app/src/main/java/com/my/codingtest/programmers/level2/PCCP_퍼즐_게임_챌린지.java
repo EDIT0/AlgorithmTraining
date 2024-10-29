@@ -31,7 +31,8 @@ public class PCCP_퍼즐_게임_챌린지 {
     public static int solution(int[] diffs, int[] times, long limit) {
         int answer = 0;
 
-        answer = (int) calLevel(1, Long.parseLong(String.valueOf(Arrays.stream(diffs).max().getAsInt())), diffs, times, 1, limit, 0);
+        answer = cal(diffs, times, limit);
+//        answer = (int) calLevel(1, Long.parseLong(String.valueOf(Arrays.stream(diffs).max().getAsInt())), diffs, times, 1, limit, 0);
 
 //        시간 초과
 //        long max = Integer.MIN_VALUE;
@@ -79,6 +80,7 @@ public class PCCP_퍼즐_게임_챌린지 {
         return answer;
     }
 
+    /* 이분탐색 재귀 */
     public static int calLevel(long minLevel, long maxLevel, int[] diffs, int[] times, int level, long limit, long prevTimeValue) {
         if(minLevel > maxLevel) {
             if(prevTimeValue < 0) {
@@ -116,4 +118,45 @@ public class PCCP_퍼즐_게임_챌린지 {
         return level;
     }
 
+    /* 이분탐색 */
+    public static int cal(int[] diffs, int[] times, long limit) {
+        long startLevel = 1;
+        long endLevel = Long.parseLong(String.valueOf(Arrays.stream(diffs).max().getAsInt()));
+        long currentLevel = 0;
+        long d = 0;
+
+        while (startLevel <= endLevel) {
+            currentLevel = (startLevel + endLevel) / 2;
+
+            long timeSum = 0;
+            for(int i=0;i<diffs.length;i++) {
+                long diff = diffs[i];
+                long time = times[i];
+                long prevTime = 0;
+                if(i > 0) {
+                    prevTime = times[i-1];
+                }
+                if(diff > currentLevel) {
+                    timeSum += ((prevTime + time) * (diff - currentLevel) + time);
+                } else if(diff <= currentLevel) {
+                    timeSum += time;
+                }
+            }
+
+            d = limit - timeSum;
+            if(d >= 0) {
+                startLevel = startLevel;
+                endLevel = currentLevel-1;
+            } else {
+                startLevel = currentLevel+1;
+                endLevel = endLevel;
+            }
+        }
+
+        if(d < 0) {
+            currentLevel += 1;
+        }
+
+        return (int) currentLevel;
+    }
 }
