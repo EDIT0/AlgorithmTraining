@@ -1,6 +1,6 @@
 package com.my.codingtest.programmers.level2;
 
-public class 숫자의_표현 {
+public class 숫자의_표현_연속된_숫자의_합 {
 
     public static void main(String[] args) {
         int n1 = 15;
