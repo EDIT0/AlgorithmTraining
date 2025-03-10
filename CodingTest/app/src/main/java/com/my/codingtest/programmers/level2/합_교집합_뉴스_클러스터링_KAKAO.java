@@ -38,6 +38,8 @@ public class 합_교집합_뉴스_클러스터링_KAKAO {
         // {AA, AA}, {AA, AA, AA} 2 / 3
         // 65536을 곱한 후에 소수점 아래를 버리고 정수부만 출력
 
+        // HashMap에 각 요소들(Key)과 key중복이 허용되지 않으므로 갯수(value)를 저장한다.
+
         HashMap<String, Integer> str1Map = new HashMap<>();
         HashMap<String, Integer> str2Map = new HashMap<>();
 
@@ -80,9 +82,16 @@ public class 합_교집합_뉴스_클러스터링_KAKAO {
         int intersection = 0; // 교집합 크기
         int union = 0;        // 합집합 크기
 
+        String intersectionStr = "";
+        String unionStr = "";
+
         // 교집합 구하기
         for (String key : str1Map.keySet()) {
             if (str2Map.containsKey(key)) {
+                int c = Math.min(str1Map.get(key), str2Map.get(key));
+                for(int i=0;i<c;i++) {
+                    intersectionStr += (key + " ");
+                }
                 intersection += Math.min(str1Map.get(key), str2Map.get(key));
             }
         }
@@ -90,8 +99,16 @@ public class 합_교집합_뉴스_클러스터링_KAKAO {
         // 합집합 구하기
         for (String key : str1Map.keySet()) {
             if (str2Map.containsKey(key)) {
+                int c = Math.max(str1Map.get(key), str2Map.get(key));
+                for(int i=0;i<c;i++) {
+                    unionStr += (key + " ");
+                }
                 union += Math.max(str1Map.get(key), str2Map.get(key));
             } else {
+                int c = str1Map.get(key);
+                for(int i=0;i<c;i++) {
+                    unionStr += (key + " ");
+                }
                 union += str1Map.get(key);
             }
         }
@@ -99,17 +116,23 @@ public class 합_교집합_뉴스_클러스터링_KAKAO {
         // str2Map에만 있는 원소 추가
         for (String key : str2Map.keySet()) {
             if (!str1Map.containsKey(key)) {
+                int c = str2Map.get(key);
+                for(int i=0;i<c;i++) {
+                    unionStr += (key + " ");
+                }
                 union += str2Map.get(key);
             }
         }
 
-        // Jaccard 유사도 계산
         if (union == 0) {
             answer = 65536;
         } else {
             double jaccard = (double) intersection / union;
             answer = (int) (65536 * jaccard);
         }
+
+        System.out.println("교집합: " + intersectionStr);
+        System.out.println("합집합: " + unionStr);
 
         return answer;
     }
