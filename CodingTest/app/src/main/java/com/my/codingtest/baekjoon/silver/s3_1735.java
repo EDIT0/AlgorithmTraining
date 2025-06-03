@@ -1,4 +1,4 @@
-package com.my.codingtest.baekjoon.bronze;
+package com.my.codingtest.baekjoon.silver;
 
 import java.io.*;
 import java.util.*;
