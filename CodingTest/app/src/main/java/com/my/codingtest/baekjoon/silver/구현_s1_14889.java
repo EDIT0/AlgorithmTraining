@@ -3,6 +3,7 @@ package com.my.codingtest.baekjoon.silver;
 import java.io.*;
 import java.util.*;
 
+// 조합
 public class 구현_s1_14889 {
 
     public static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
