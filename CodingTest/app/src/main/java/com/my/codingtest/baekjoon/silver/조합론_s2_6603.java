@@ -1,0 +1,157 @@
+package com.my.codingtest.baekjoon.silver;
+
+import java.io.*;
+import java.util.*;
+
+public class 조합론_s2_6603 {
+
+    public static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    public static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    public static StringTokenizer st;
+
+
+    /**
+     * 문제
+     * 독일 로또는 {1, 2, ..., 49}에서 수 6개를 고른다.
+     *
+     * 로또 번호를 선택하는데 사용되는 가장 유명한 전략은 49가지 수 중 k(k>6)개의 수를 골라 집합 S를 만든 다음 그 수만 가지고 번호를 선택하는 것이다.
+     *
+     * 예를 들어, k=8, S={1,2,3,5,8,13,21,34}인 경우 이 집합 S에서 수를 고를 수 있는 경우의 수는 총 28가지이다. ([1,2,3,5,8,13], [1,2,3,5,8,21], [1,2,3,5,8,34], [1,2,3,5,13,21], ..., [3,5,8,13,21,34])
+     *
+     * 집합 S와 k가 주어졌을 때, 수를 고르는 모든 방법을 구하는 프로그램을 작성하시오.
+     *
+     * 입력
+     * 입력은 여러 개의 테스트 케이스로 이루어져 있다. 각 테스트 케이스는 한 줄로 이루어져 있다. 첫 번째 수는 k (6 < k < 13)이고, 다음 k개 수는 집합 S에 포함되는 수이다. S의 원소는 오름차순으로 주어진다.
+     *
+     * 입력의 마지막 줄에는 0이 하나 주어진다.
+     *
+     * 출력
+     * 각 테스트 케이스마다 수를 고르는 모든 방법을 출력한다. 이때, 사전 순으로 출력한다.
+     *
+     * 각 테스트 케이스 사이에는 빈 줄을 하나 출력한다.
+     *
+     * 7 1 2 3 4 5 6 7
+     * 8 1 2 3 5 8 13 21 34
+     * 0
+     *
+     * 1 2 3 4 5 6
+     * 1 2 3 4 5 7
+     * 1 2 3 4 6 7
+     * 1 2 3 5 6 7
+     * 1 2 4 5 6 7
+     * 1 3 4 5 6 7
+     * 2 3 4 5 6 7
+     *
+     * 1 2 3 5 8 13
+     * 1 2 3 5 8 21
+     * 1 2 3 5 8 34
+     * 1 2 3 5 13 21
+     * 1 2 3 5 13 34
+     * 1 2 3 5 21 34
+     * 1 2 3 8 13 21
+     * 1 2 3 8 13 34
+     * 1 2 3 8 21 34
+     * 1 2 3 13 21 34
+     * 1 2 5 8 13 21
+     * 1 2 5 8 13 34
+     * 1 2 5 8 21 34
+     * 1 2 5 13 21 34
+     * 1 2 8 13 21 34
+     * 1 3 5 8 13 21
+     * 1 3 5 8 13 34
+     * 1 3 5 8 21 34
+     * 1 3 5 13 21 34
+     * 1 3 8 13 21 34
+     * 1 5 8 13 21 34
+     * 2 3 5 8 13 21
+     * 2 3 5 8 13 34
+     * 2 3 5 8 21 34
+     * 2 3 5 13 21 34
+     * 2 3 8 13 21 34
+     * 2 5 8 13 21 34
+     * 3 5 8 13 21 34
+     *
+     * */
+
+    public static void main(String[] args) throws IOException {
+        while (true) {
+            st = new StringTokenizer(br.readLine(), " ");
+
+            int k = Integer.parseInt(st.nextToken());
+
+            if(k == 0) {
+                break;
+            }
+
+            int[] arr = new int[k];
+            for(int i=0;i<k;i++) {
+                arr[i] = Integer.parseInt(st.nextToken());
+            }
+
+            combination(arr, new boolean[arr.length], 0, 0, 6);
+            bw.write("\n");
+
+//            permutation(arr, new boolean[arr.length], 0, 6);
+//            bw.write("\n");
+//            long answer = binominalEfficient(k, 6);
+//            bw.write(answer + "\n");
+        }
+
+        bw.flush();
+        bw.close();
+        br.close();
+
+    }
+
+    // 조합
+    public static void combination(int[] arr, boolean[] visited, int start, int depth, int k) throws IOException{
+        if(depth == k) {
+            for(int i=0;i<arr.length;i++){
+                if(visited[i]) {
+                    bw.write(arr[i] + " ");
+                }
+            }
+            bw.write("\n");
+            return;
+        }
+        for(int i=start;i<arr.length;i++){
+            if(!visited[i]){
+                visited[i] = true;
+                combination(arr, visited, i+1, depth+1, k);
+                visited[i] = false;
+            }
+        }
+    }
+
+    // 조합 갯수 공식 nCm
+    public static long binominalEfficient(int n, int m) {
+        int s = n-m;
+        long result = 1;
+        for(int i=1;i<=m;i++) {
+            result = result * (s+i) / i;
+        }
+
+        return result;
+    }
+
+    // 순열
+    public static void permutation(int[] arr, boolean[] visited, int depth, int k) throws IOException {
+        if (depth == k) {
+            for (int i=0;i<arr.length;i++) {
+                if (visited[i]) {
+                    bw.write(arr[i] + " ");
+                }
+            }
+            bw.write("\n");
+            return;
+        }
+
+        for (int i=0;i<arr.length;i++) {
+            if (!visited[i]) {
+                visited[i] = true;
+                permutation(arr, visited, depth+1, k);
+                visited[i] = false;
+            }
+        }
+    }
+}
