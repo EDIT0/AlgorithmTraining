@@ -3,7 +3,7 @@ package com.my.codingtest.baekjoon.silver;
 import java.io.*;
 import java.util.*;
 
-public class 깊이우선탐색_s4_4963 {
+public class 깊이우선탐색_s2_4963 {
 
     public static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     public static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
