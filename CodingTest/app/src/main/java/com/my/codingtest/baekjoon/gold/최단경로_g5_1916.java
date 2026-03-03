@@ -3,7 +3,7 @@ package com.my.codingtest.baekjoon.gold;
 import java.io.*;
 import java.util.*;
 
-public class 최단거리_g5_1916 {
+public class 최단경로_g5_1916 {
 
     public static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     public static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
