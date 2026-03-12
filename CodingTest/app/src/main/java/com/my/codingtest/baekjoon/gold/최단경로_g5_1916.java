@@ -51,6 +51,45 @@ public class 최단경로_g5_1916 {
 
         dist[destinationStart] = 0;
 
+        priorityQueue(destinationStart);
+//        noPriorityQueue();
+    }
+
+    public static void priorityQueue(int destinationStart) {
+        PriorityQueue<int[]> pq = new PriorityQueue<>((o1, o2) -> o1[1] - o2[1]);
+
+        pq.add(new int[] { destinationStart, dist[destinationStart] });
+
+        boolean[] visited = new boolean[N+1];
+
+        while (!pq.isEmpty()) {
+            int[] p = pq.poll();
+
+            int node = p[0];
+            int weight = p[1];
+
+            if(visited[node]) {
+                continue;
+            }
+
+            visited[node] = true;
+
+            for(int i=0;i<graph.get(node).size();i++) {
+                Node newNode = graph.get(node).get(i);
+                int s = newNode.start;
+                int e = newNode.end;
+                int w = newNode.weight;
+                if(!visited[e]) {
+                    if(dist[e] > dist[node] + w) {
+                        dist[e] = dist[node] + w;
+                        pq.add(new int[] { e, dist[e] });
+                    }
+                }
+            }
+        }
+    }
+
+    public static void noPriorityQueue() {
         boolean[] visited = new boolean[N+1];
 
         for(int i=1;i<=N;i++) {
