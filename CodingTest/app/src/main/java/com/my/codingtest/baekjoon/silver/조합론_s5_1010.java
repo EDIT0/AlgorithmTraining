@@ -17,7 +17,7 @@ public class 조합론_s5_1010 {
             int N = Integer.parseInt(st.nextToken());
             int M= Integer.parseInt(st.nextToken());
 
-            bw.write(binominalEfficient(M, N) + "\n");
+            bw.write(binomialCoefficient(M, N) + "\n");
         }
 
         bw.flush();
@@ -25,7 +25,7 @@ public class 조합론_s5_1010 {
         br.close();
     }
 
-    public static long binominalEfficient(int n, int m) {
+    public static long binomialCoefficient(int n, int m) {
         // 29, 13
         // 29! / (13! * 16!)
         // 5, 1

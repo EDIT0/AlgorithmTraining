@@ -93,7 +93,7 @@ public class 조합론_s2_6603 {
 
 //            permutation(arr, new boolean[arr.length], 0, 6);
 //            bw.write("\n");
-//            long answer = binominalEfficient(k, 6);
+//            long answer = binomialCoefficient(k, 6);
 //            bw.write(answer + "\n");
         }
 
@@ -124,7 +124,7 @@ public class 조합론_s2_6603 {
     }
 
     // 조합 갯수 공식 nCm
-    public static long binominalEfficient(int n, int m) {
+    public static long binomialCoefficient(int n, int m) {
         int s = n-m;
         long result = 1;
         for(int i=1;i<=m;i++) {
